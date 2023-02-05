@@ -27,6 +27,7 @@ import {
   Menu as MenuButton,
   ShoppingCart,
 } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
 
 const MENU_ITEMS = [
   {
@@ -40,7 +41,7 @@ const MENU_ITEMS = [
 ];
 
 export function NavBar() {
-  const [open, setOpen] = useState<boolean>(false);
+  const [openCart, setOpenCart] = useState<boolean>(false);
   const [openMobileCartMenu, setOpenMobileCartMenu] = useState<boolean>(false);
   const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null);
   const handleOpenShoppingCart = (event: React.MouseEvent<HTMLElement>) => {
@@ -49,12 +50,13 @@ export function NavBar() {
   const handleCloseShoppingCart = () => {
     setAnchorElCart(null);
   };
-  /* FIXME: Opravit to, aby se nepřekrejvali, ale vždycky se zavřeli */
+
+  const navigate = useNavigate();
   const mobileMenu = (
     <Drawer
-      open={open}
+      open={openCart}
       anchor="top"
-      onClose={() => setOpen(false)}
+      onClose={() => setOpenCart(false)}
       sx={{
         "& .MuiPaper-root": {
           top: 55,
@@ -69,7 +71,12 @@ export function NavBar() {
         <List>
           {MENU_ITEMS.map((item) => (
             <ListItem key={item.title}>
-              <ListItemButton>
+              <ListItemButton
+                onClick={() => {
+                  navigate(item.url);
+                  setOpenCart(false);
+                }}
+              >
                 <ListItemText primary={item.title} />
               </ListItemButton>
             </ListItem>
@@ -150,13 +157,16 @@ export function NavBar() {
   return (
     <StyledAppBar>
       <StyledToolBar>
-        <LogoIcon src="/pokemon-logo.svg" />
+        <Link to="/" onClick={() => setOpenCart(false)}>
+          <LogoIcon src="/pokemon-logo.svg" />
+        </Link>
         <StyledBox>
           {MENU_ITEMS.map((item) => (
             /* TODO: Přidat Link na správnou adresu */
-            <MenuItemStyled key={item.title}>{item.title}</MenuItemStyled>
+            <MenuItemStyled key={item.title}>
+              <Link to={item.url}>{item.title}</Link>
+            </MenuItemStyled>
           ))}
-          {/* Změnit mobilní cart jako drawer */}
           <IconButton onClick={(e) => handleOpenShoppingCart(e)}>
             <Badge badgeContent={2} color="error">
               <ShoppingCart />
@@ -167,7 +177,7 @@ export function NavBar() {
           <IconButton
             onClick={() => {
               setOpenMobileCartMenu((prev) => !prev);
-              setOpen(false);
+              setOpenCart(false);
             }}
           >
             <Tooltip title="Open Cart">
@@ -177,14 +187,14 @@ export function NavBar() {
             </Tooltip>
           </IconButton>
           {/* TODO: Kouknout jestli zde nejde přidat nějaká animace */}
-          {open ? (
-            <IconButton onClick={() => setOpen(false)}>
+          {openCart ? (
+            <IconButton onClick={() => setOpenCart(false)}>
               <Clear />
             </IconButton>
           ) : (
             <IconButton
               onClick={() => {
-                setOpen(true);
+                setOpenCart(true);
                 setOpenMobileCartMenu(false);
               }}
             >

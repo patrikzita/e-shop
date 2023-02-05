@@ -14,3 +14,8 @@
   border-right: 10px solid transparent;
   border-top: 10px solid #e0e0e0;
 }
+
+/* Due to React-router link styling */
+a {
+  all: unset;
+}
