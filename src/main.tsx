@@ -4,11 +4,11 @@ import { App } from "./App";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { red, grey } from "@mui/material/colors";
+import { red, grey, blue } from "@mui/material/colors";
 import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
-
+/* V souboru createPalette.d.ts je potřeba přidat vždycky proměnnou a dát jí typ */
 let theme = createTheme({
   palette: {
     primary: {
@@ -16,6 +16,9 @@ let theme = createTheme({
     },
     secondary: {
       main: red["A400"],
+    },
+    common: {
+      pokemonRed: "#FF0000",
     },
   },
   typography: {

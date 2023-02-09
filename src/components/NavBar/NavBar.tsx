@@ -70,10 +70,9 @@ export function NavBar() {
       <Box>
         <List>
           {MENU_ITEMS.map((item) => (
-            <ListItem key={item.title}>
+            <ListItem key={item.title} component={Link} to={item.url}>
               <ListItemButton
                 onClick={() => {
-                  navigate(item.url);
                   setOpenCart(false);
                 }}
               >
@@ -232,7 +231,6 @@ export function NavBar() {
               </div>
               <List sx={{ padding: "1rem 0" }}>
                 <ListItem
-                  onClick={() => console.log("Ahoj")}
                   sx={{
                     cursor: "pointer",
                     "&:hover": {
@@ -279,6 +277,7 @@ export function NavBar() {
 const StyledAppBar = styled(AppBar)({
   position: "sticky",
   zIndex: "1210", // Kvůli Draweru, aby se schoval pod menu
+  padding: ".2rem",
 });
 
 const StyledToolBar = styled(Toolbar)({

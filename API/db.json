@@ -1,0 +1,50 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "Pokémon Crown Zenith Elite Trainer Box",
+            "price": 19.99,
+            "imgUrl": "pokemon_crown_box.png",
+            "type": "box",
+            "amount": 10,
+            "description": "Pokémon Crown Zenith Elite Trainer Box je speciální dárkové balení pro všechny hráče, kteří se chtějí v hraní posunout o další úroveň a začít pravidelně chodit na turnajová hraní. Uvnitř balení naleznete speciální promo kartu s Pokémonem Lucario VSTAR, která zatím nikde jinde nevyšla. Obsah balení dále doplňuje 10 doplňkových Boosterů speciální edice Crown Zenith, 65 herních obalů s motivem Lucaria, 45 karet energií, průvodce edicí Crown Zenith, 6 kostek pro značení zranění, házecí kostka, 2 akrylové žetony pro popálení a otravu, 4 oddělovače a kód do online hry."
+        },
+        {
+            "id": "2",
+            "name": "Pokémon Crown Zenith Booster",
+            "price": 4.99,
+            "imgUrl": "pokemon_crown_booster.png",
+            "type": "booster",
+            "amount": 18,
+            "description": "Pokémon Booster z edice Crown Zenith je základní doplňkový balíček karetní hry Pokémon, který nabízí hráčům možnost rozšířit si svoji sbírku Pokémonů o nové karty. V každém balíčku je 10 náhodných karet. Pokud budete mít štěstí, narazíte i na silné Pokémony VSTAR! "
+        },
+        {
+            "id": "3",
+            "name": "Pokémon Sword and Shield - Silver Tempest Booster",
+            "price": 4.49,
+            "discount": 4,
+            "imgUrl": "pokemo_silver_tempest_booster.png",
+            "type": "booster",
+            "amount": 11,
+            "description": "Pokémon Sword and Shield - Silver Tempest je dvanáctá edice ze Sword and Shield série sběratelské karetní hry Pokémon. V Boosteru Silver Tempest najdete 10 náhodně namíchaných karet z celé edice a díky těmto kartám si můžete vylepšit svůj herní balíček nebo vaši sbírku karet."
+        },
+        {
+            "id": "4",
+            "name": "Pokémon Sword and Shield - Chilling Reign Booster Box",
+            "price": 19.99,
+            "imgUrl": "pokemon_chilling_reign_box.png",
+            "type": "box",
+            "amount": 24,
+            "description": "Booster Box Chilling Reign obsahuje 36 Boosterů (rozšiřující balíček po 10 kartách) z edice Sword and Shield - Chilling Reign, které jsou uloženy v tomto balení. Díky tomu výrazně ušetříte, než kdybyste kupovali Boostery samostatně, a navíc máte u tohoto produktu poštovné zdarma."
+        },
+        {
+            "id": "5",
+            "name": "Pokémon GO Booster",
+            "price": 3.49,
+            "imgUrl": "pokemon_go_booster.png",
+            "type": "booster",
+            "amount": 18,
+            "description": "Pokémon Booster z edice Pokémon GO je základní doplňkový balíček karetní hry Pokémon, který nabízí hráčům možnost rozšířit si svoji sbírku Pokémonů o nové karty. V každém balíčku je 10 náhodných karet. Pokud budete mít štěstí, narazíte i na silné Pokémony VSTAR!"
+        }
+    ]
+}
