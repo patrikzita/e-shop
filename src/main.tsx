@@ -19,6 +19,7 @@ let theme = createTheme({
     },
     common: {
       pokemonRed: "#FF0000",
+      blue: blue[600],
     },
   },
   typography: {

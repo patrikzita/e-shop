@@ -7,6 +7,7 @@
             "imgUrl": "pokemon_crown_box.png",
             "type": "box",
             "amount": 10,
+            "discount": 10,
             "description": "Pokémon Crown Zenith Elite Trainer Box je speciální dárkové balení pro všechny hráče, kteří se chtějí v hraní posunout o další úroveň a začít pravidelně chodit na turnajová hraní. Uvnitř balení naleznete speciální promo kartu s Pokémonem Lucario VSTAR, která zatím nikde jinde nevyšla. Obsah balení dále doplňuje 10 doplňkových Boosterů speciální edice Crown Zenith, 65 herních obalů s motivem Lucaria, 45 karet energií, průvodce edicí Crown Zenith, 6 kostek pro značení zranění, házecí kostka, 2 akrylové žetony pro popálení a otravu, 4 oddělovače a kód do online hry."
         },
         {
@@ -23,7 +24,7 @@
             "name": "Pokémon Sword and Shield - Silver Tempest Booster",
             "price": 4.49,
             "discount": 4,
-            "imgUrl": "pokemo_silver_tempest_booster.png",
+            "imgUrl": "pokemon_silver_tempest_booster.png",
             "type": "booster",
             "amount": 11,
             "description": "Pokémon Sword and Shield - Silver Tempest je dvanáctá edice ze Sword and Shield série sběratelské karetní hry Pokémon. V Boosteru Silver Tempest najdete 10 náhodně namíchaných karet z celé edice a díky těmto kartám si můžete vylepšit svůj herní balíček nebo vaši sbírku karet."

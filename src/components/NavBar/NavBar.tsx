@@ -28,6 +28,8 @@ import {
   ShoppingCart,
 } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+import CartItem from "./CartItem";
 
 const MENU_ITEMS = [
   {
@@ -50,8 +52,8 @@ export function NavBar() {
   const handleCloseShoppingCart = () => {
     setAnchorElCart(null);
   };
+  const { cartItems, removeCartItems } = useShoppingCart();
 
-  const navigate = useNavigate();
   const mobileMenu = (
     <Drawer
       open={openCart}
@@ -118,27 +120,9 @@ export function NavBar() {
           </IconButton>
         </Stack>
         <List sx={{ padding: "1rem 0" }}>
-          <ListItem
-            onClick={() => console.log("Ahoj")}
-            sx={{
-              cursor: "pointer",
-              "&:hover": {
-                background: "rgba(234, 234, 234, 0.41)",
-              },
-            }}
-            secondaryAction={
-              <IconButton>
-                <Delete color="error" />
-              </IconButton>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar variant="square">
-                <CatchingPokemon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Moje zboží" secondary="10x" />
-          </ListItem>
+          {cartItems.map((item) => (
+            <CartItem key={item.id} id={item.id} />
+          ))}
         </List>
         <Stack
           direction="row"
@@ -161,13 +145,12 @@ export function NavBar() {
         </Link>
         <StyledBox>
           {MENU_ITEMS.map((item) => (
-            /* TODO: Přidat Link na správnou adresu */
             <MenuItemStyled key={item.title}>
               <Link to={item.url}>{item.title}</Link>
             </MenuItemStyled>
           ))}
           <IconButton onClick={(e) => handleOpenShoppingCart(e)}>
-            <Badge badgeContent={2} color="error">
+            <Badge badgeContent={cartItems.length} color="error">
               <ShoppingCart />
             </Badge>
           </IconButton>
@@ -180,7 +163,7 @@ export function NavBar() {
             }}
           >
             <Tooltip title="Open Cart">
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={cartItems.length} color="error">
                 <ShoppingCart />
               </Badge>
             </Tooltip>
@@ -205,13 +188,18 @@ export function NavBar() {
             anchorEl={anchorElCart}
             anchorOrigin={{
               vertical: "bottom",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
               horizontal: "center",
             }}
+            disableScrollLock={true} // Solve the bug with scrollbar
             onClose={handleCloseShoppingCart}
           >
             <Box
               sx={{
-                minWidth: "20rem",
+                minWidth: "25rem",
                 p: 2,
               }}
             >
@@ -229,38 +217,35 @@ export function NavBar() {
                   </IconButton>
                 </Stack>
               </div>
-              <List sx={{ padding: "1rem 0" }}>
-                <ListItem
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": {
-                      background: "rgba(234, 234, 234, 0.41)",
-                    },
-                  }}
-                  secondaryAction={
-                    <IconButton>
-                      <Delete color="error" />
-                    </IconButton>
-                  }
+              {cartItems.length !== 0 ? (
+                <List sx={{ padding: "1rem 0" }}>
+                  {cartItems.map((item) => (
+                    <CartItem key={item.id} id={item.id} />
+                  ))}
+                </List>
+              ) : (
+                <Box sx={{ bgcolor: "#eef9ff", padding: 3, m: "1rem 0" }}>
+                  <Typography variant="h5">Your Cart is empty...</Typography>
+                </Box>
+              )}
+
+              {cartItems.length !== 0 && (
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
                 >
-                  <ListItemAvatar>
-                    <Avatar variant="square">
-                      <CatchingPokemon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary="Moje zboží" secondary="10x" />
-                </ListItem>
-              </List>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Button sx={{ color: "common.black" }}>Empty the Bin</Button>
-                <Button size="small" variant="contained" color="error">
-                  Buy
-                </Button>
-              </Stack>
+                  <Button
+                    sx={{ color: "common.black" }}
+                    onClick={removeCartItems}
+                  >
+                    Empty the Bin
+                  </Button>
+                  <Button size="small" variant="contained" color="error">
+                    Buy
+                  </Button>
+                </Stack>
+              )}
             </Box>
           </Popover>
         </IconsBox>
