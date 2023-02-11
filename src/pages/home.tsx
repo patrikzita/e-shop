@@ -5,7 +5,8 @@ const Home = () => {
   return (
     <>
       <CarouselProvider />
-      <StoreList />
+      {/* <StoreList /> */}
+      <StoreList title={"News & Promotions"} sortItem="promotion" />
     </>
   );
 };

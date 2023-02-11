@@ -1,4 +1,4 @@
-import { CatchingPokemon, Delete } from "@mui/icons-material";
+import { CatchingPokemon, Delete, Discount } from "@mui/icons-material";
 import {
   Avatar,
   IconButton,
@@ -24,7 +24,6 @@ const CartItem = ({ id }: CartItem) => {
   });
   if (productQuery.status === "loading") return <h1>Loading...</h1>;
   if (productQuery.status === "error") return <h1>Not connected to API</h1>;
-
   return (
     <ListItem
       onClick={() => console.log("Ahoj")}
@@ -50,7 +49,14 @@ const CartItem = ({ id }: CartItem) => {
       <ListItemText
         primaryTypographyProps={{ maxWidth: "15rem" }}
         primary={productQuery.data.name}
-        secondary={formatCurrency(productQuery.data.price)}
+        secondary={
+          productQuery.data.discount
+            ? formatCurrency(
+                (productQuery.data.price * (100 - productQuery.data.discount)) /
+                  100
+              )
+            : formatCurrency(productQuery.data.price)
+        }
       />
     </ListItem>
   );

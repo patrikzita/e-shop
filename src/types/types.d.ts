@@ -7,4 +7,5 @@ export type ProductProps = {
   amount: number;
   description: string;
   discount?: number;
+  promotion?: boolean;
 };

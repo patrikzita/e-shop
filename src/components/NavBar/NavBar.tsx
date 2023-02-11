@@ -17,16 +17,8 @@ import {
   Popover,
   Stack,
   Button,
-  ListItemAvatar,
-  Avatar,
 } from "@mui/material";
-import {
-  CatchingPokemon,
-  Clear,
-  Delete,
-  Menu as MenuButton,
-  ShoppingCart,
-} from "@mui/icons-material";
+import { Clear, Menu as MenuButton, ShoppingCart } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import CartItem from "./CartItem";
@@ -53,6 +45,7 @@ export function NavBar() {
     setAnchorElCart(null);
   };
   const { cartItems, removeCartItems } = useShoppingCart();
+  const navigate = useNavigate();
 
   const mobileMenu = (
     <Drawer
@@ -119,21 +112,32 @@ export function NavBar() {
             <Clear />
           </IconButton>
         </Stack>
-        <List sx={{ padding: "1rem 0" }}>
-          {cartItems.map((item) => (
-            <CartItem key={item.id} id={item.id} />
-          ))}
-        </List>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Button sx={{ color: "common.black" }}>Empty the Bin</Button>
-          <Button size="small" variant="contained" color="error">
-            Buy
-          </Button>
-        </Stack>
+
+        {cartItems.length !== 0 ? (
+          <List sx={{ padding: "1rem 0" }}>
+            {cartItems.map((item) => (
+              <CartItem key={item.id} id={item.id} />
+            ))}
+          </List>
+        ) : (
+          <Box sx={{ bgcolor: "#eef9ff", padding: 3, m: "1rem 0" }}>
+            <Typography variant="h5">Your Cart is empty...</Typography>
+          </Box>
+        )}
+        {cartItems.length !== 0 && (
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Button sx={{ color: "common.black" }} onClick={removeCartItems}>
+              Empty the Bin
+            </Button>
+            <Button size="small" variant="contained" color="error">
+              Buy
+            </Button>
+          </Stack>
+        )}
       </Box>
     </Drawer>
   );
@@ -145,8 +149,8 @@ export function NavBar() {
         </Link>
         <StyledBox>
           {MENU_ITEMS.map((item) => (
-            <MenuItemStyled key={item.title}>
-              <Link to={item.url}>{item.title}</Link>
+            <MenuItemStyled key={item.title} onClick={() => navigate(item.url)}>
+              {item.title}
             </MenuItemStyled>
           ))}
           <IconButton onClick={(e) => handleOpenShoppingCart(e)}>
@@ -168,7 +172,6 @@ export function NavBar() {
               </Badge>
             </Tooltip>
           </IconButton>
-          {/* TODO: Kouknout jestli zde nejde přidat nějaká animace */}
           {openCart ? (
             <IconButton onClick={() => setOpenCart(false)}>
               <Clear />

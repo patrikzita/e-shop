@@ -1,7 +1,7 @@
-import React from "react";
+import StoreList from "../components/Shop/StoreList";
 
 const Cards = () => {
-  return <div>Cards</div>;
+  return <StoreList title="Boosters" sortItem="booster" />;
 };
 
 export default Cards;
