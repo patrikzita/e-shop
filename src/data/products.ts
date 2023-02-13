@@ -8,7 +8,11 @@ export function getProducts() {
 export function getProduct(id: string) {
   return axios
     .get(`http://localhost:3000/products/${id}`)
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((error) => {
+      console.error(error);
+      return Promise.reject(error);
+    });
 }
 export function getSpecificProduct(sort: string) {
   return axios

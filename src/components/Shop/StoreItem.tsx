@@ -14,6 +14,7 @@ import {
 import { formatCurrency } from "../../utilities/formatCurrency";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /* TODO: Použít SnackBar pro hlášku, že byl přidán Item do Cart */
 
@@ -29,6 +30,7 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
   const { increaseCartQuantity, cartItems } = useShoppingCart();
   const isAdded = cartItems.some((item) => item.id === id);
   const [isOpenSnack, setIsOpenSnack] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleClose = (
     event: React.SyntheticEvent | Event,
@@ -39,6 +41,10 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
     }
     setIsOpenSnack(false);
   };
+
+  function handleClickCard() {
+    navigate(`/products/${id}`);
+  }
 
   return (
     <>
@@ -52,6 +58,7 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
           },
         }}
+        onClick={() => handleClickCard()}
       >
         <CardMedia component="img" image={imgUrl} />
         <CardContent
@@ -139,7 +146,8 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
                 },
               }}
               startIcon={<ShoppingCart />}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 increaseCartQuantity(id);
                 setIsOpenSnack(true);
               }}

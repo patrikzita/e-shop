@@ -21,7 +21,6 @@ const StoreList = ({ title, sortItem }: StoreListProps) => {
     queryKey: ["products", sortItem],
     queryFn: () => getSpecificProduct(sortItem),
   });
-  console.log(productsQuery.data);
 
   if (productsQuery.status === "loading") {
     return (

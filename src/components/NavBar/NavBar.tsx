@@ -25,8 +25,8 @@ import CartItem from "./CartItem";
 
 const MENU_ITEMS = [
   {
-    title: "Cards",
-    url: "/Cards",
+    title: "Boosters",
+    url: "/boosters",
   },
   {
     title: "Boxes",
