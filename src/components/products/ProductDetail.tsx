@@ -7,7 +7,6 @@ import {
   IconButton,
   Stack,
   styled,
-  TextField,
   Typography,
   Link,
   Menu,
@@ -20,6 +19,8 @@ import { useParams } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { getProduct } from "../../data/products";
 import { formatCurrency } from "../../utilities/formatCurrency";
+import ErrorComponent from "../Others/ErrorComponent";
+import axios from "axios";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -41,18 +42,16 @@ const ProductDetail = () => {
     setAnchorShareMenu(null);
   };
 
-  const ImgComponent = styled("div")(({ theme }) => ({
-    background: `url(/${productQuery.data.imgUrl})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    backgroundSize: "100%",
-    width: "100%",
-    height: "100%",
-    minHeight: "60vh",
-  }));
+  const ImgComponent = styled("div")(({ theme }) => ({}));
 
   if (productQuery.status === "loading") return <div>Loading data...</div>;
-  if (productQuery.status === "error") return <div>Data nebyla nalezena</div>;
+  if (productQuery.error instanceof Error) {
+    let errorStatus = null;
+    if (axios.isAxiosError(productQuery.error)) {
+      errorStatus = productQuery.error.response?.status;
+    }
+    return <ErrorComponent status={errorStatus ?? 500} />;
+  }
 
   const ShareMenu = (
     <Menu
@@ -101,9 +100,18 @@ const ProductDetail = () => {
           {productQuery.data.name}
         </Link>
       </Breadcrumbs>
-      <Container sx={{ mt: 3 }}>
+      <Container>
         <Stack direction={{ xs: "column", sm: "row" }} sx={{ height: "100%" }}>
-          <ImgComponent />
+          <ImgComponent
+            sx={{
+              background: `url(/${productQuery.data.imgUrl})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundSize: "100%",
+              width: "100%",
+              minHeight: "70vh",
+            }}
+          />
           <Box
             sx={{
               flex: "0 0 40%",

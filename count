@@ -1,0 +1,41 @@
+[33mcommit 63f7eaefb21463e598fe123b88109807b9025921[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: patrikzita <patrikzit@seznam.cz>
+Date:   Mon Feb 13 16:27:12 2023 +0100
+
+    The basic structure of Product Detail page is finished
+
+[33mcommit 62c26c0f7007b97b746fa205fc5a31e9ace183db[m
+Author: patrikzita <patrikzit@seznam.cz>
+Date:   Sat Feb 11 12:53:32 2023 +0100
+
+    StoreList made more universal
+
+[33mcommit 7201c5adcb5bdbe5f8f3b5dbc65fefd32167395e[m
+Author: patrikzita <patrikzit@seznam.cz>
+Date:   Fri Feb 10 15:22:50 2023 +0100
+
+    Connection between ShoppingCartContext and NavBar Cart
+
+[33mcommit 4d1208a88ab52bf81c63847246eca505e5a1f3e2[m
+Author: patrikzita <patrikzit@seznam.cz>
+Date:   Thu Feb 9 07:04:36 2023 +0100
+
+    Added ShoppingCartContext, Carousel, and own params for theme
+
+[33mcommit ff91fb7388b68ec48444fe3abc2782965a12bb3d[m
+Author: patrikzita <patrikzit@seznam.cz>
+Date:   Sun Feb 5 14:55:53 2023 +0100
+
+    Menu connected with React-Router
+
+[33mcommit 868d05a35254448716cbbe1ecd3f59bdd97704f1[m
+Author: patrikzita <patrikzit@seznam.cz>
+Date:   Sun Feb 5 14:12:55 2023 +0100
+
+    Menu UI completed without functions
+
+[33mcommit e933dfdc511b70241a537975ce78774eab22ed04[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: patrikzita <patrikzit@seznam.cz>
+Date:   Fri Feb 3 06:46:11 2023 +0100
+
+    Project started
