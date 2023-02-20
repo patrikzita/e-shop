@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Values } from "../components/products/ProductForm";
 import { ProductProps } from "../types/types";
 
 export function getProducts() {
@@ -34,3 +35,15 @@ export function getSpecificProduct(sort: string) {
       }
     });
 }
+
+export const createProduct = async (productData: Values) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/products",
+      productData
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

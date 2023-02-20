@@ -5,8 +5,26 @@ import { TextField, TextFieldProps } from "@mui/material";
 const FieldCustom: React.FC<FieldProps & TextFieldProps> = ({
   label,
   field,
+  form,
 }) => {
-  return <TextField {...field} label={label} />;
+  const error = form.errors[field.name];
+  const touched = form.touched[field.name];
+
+  return (
+    <TextField
+      {...field}
+      label={label}
+      helperText={typeof error === "string" ? error : ""}
+      error={touched && Boolean(error)}
+    />
+  );
 };
 
 export default FieldCustom;
+
+/* form obsahuje values, errors, touched, setFieldValue, setFieldTouched 
+touched - pole zda bylo formulářové pole změněno uživatelem
+errors- aktuální chyby
+setFieldValue - funkce pro nastavení hodnoty formulářového pole
+setFieldTouched - funkce pro označení formulářového pole jako změněného
+*/

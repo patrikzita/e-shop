@@ -1,15 +1,18 @@
 import {
+  Button,
   Card,
   CardContent,
   Container,
   Grid,
   Skeleton,
+  Stack,
   Typography,
 } from "@mui/material";
 import StoreItem from "./StoreItem";
 import { useQuery } from "@tanstack/react-query";
 import { getSpecificProduct } from "../../data/products";
 import { ProductProps } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
 type StoreListProps = {
   title: string;
@@ -17,6 +20,7 @@ type StoreListProps = {
 };
 
 const StoreList = ({ title, sortItem }: StoreListProps) => {
+  const navigate = useNavigate();
   const productsQuery = useQuery({
     queryKey: ["products", sortItem],
     queryFn: () => getSpecificProduct(sortItem),
@@ -37,12 +41,18 @@ const StoreList = ({ title, sortItem }: StoreListProps) => {
   return (
     <>
       <Container sx={{ p: 4 }}>
-        <Typography
-          variant="h4"
-          sx={{ mb: "4rem", textTransform: "capitalize" }}
-        >
-          {title}
-        </Typography>
+        <Stack direction="row" justifyContent="space-between" m={3}>
+          <Typography variant="h4" sx={{ textTransform: "capitalize" }}>
+            {title}
+          </Typography>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={() => navigate("/products/new")}
+          >
+            Create New
+          </Button>
+        </Stack>
         <Grid container rowSpacing={8}>
           {productsQuery.data.map((product: ProductProps) => (
             <Grid item xs={12} sm={6} md={4} lg={4} key={product.id}>
