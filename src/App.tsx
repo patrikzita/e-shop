@@ -9,6 +9,7 @@ const Boxes = lazy(() => import("./pages/boxes"));
 const Home = lazy(() => import("./pages/home"));
 const ProductDetail = lazy(() => import("./components/products/ProductDetail"));
 const ProductForm = lazy(() => import("./components/products/ProductForm"));
+const EditProduct = lazy(() => import("././components/products/EditProduct"));
 const ErrorComponent = lazy(() => import("./components/Others/ErrorComponent"));
 
 export function App() {
@@ -21,6 +22,7 @@ export function App() {
             <Route path="/" element={<Home />} />
             <Route path="/boosters" element={<Cards />} />
             <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/products/:id/edit" element={<EditProduct />} />
             <Route path="/products/new" element={<ProductForm />} />
             <Route path="/boxes" element={<Boxes />} />
             <Route path="*" element={<ErrorComponent status={404} />} />

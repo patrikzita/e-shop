@@ -15,7 +15,7 @@ import {
 import { Container } from "@mui/system";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { getProduct } from "../../data/products";
 import { formatCurrency } from "../../utilities/formatCurrency";
@@ -34,6 +34,7 @@ const ProductDetail = () => {
     null
   );
   const open = Boolean(anchorShareMenu);
+  const navigate = useNavigate();
 
   const handleClickShareMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorShareMenu(event.currentTarget);
@@ -209,6 +210,13 @@ const ProductDetail = () => {
                 Add to Cart
               </Button>
             </Stack>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => navigate(`/products/${id}/edit`)}
+            >
+              Edit
+            </Button>
           </Box>
         </Stack>
         <Divider />

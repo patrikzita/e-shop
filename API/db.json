@@ -72,12 +72,11 @@
       "id": "8",
       "name": "Pokémon Crown Zenith Collection - Regidrago V",
       "price": 19.99,
-      "imgUrl": "pokemon_crown_zenith_box.png",
       "discount": 10,
+      "imgUrl": "pokemon_crown_zenith_box.png",
       "type": "box",
       "amount": 18,
-      "promotion": true,
-      "description": "Pokémon TCG Crown Zenith Collection je speciální kolekce karetní hry Pokémon z produktové edice Crown Zenith (poslední z cyklu Sword and Shield). Balení obsahuje kartu Regidrago V, Jumbo kartu Regidrago V, Promo Regieleki a čtyři Boostery. Oproti běžnému V Boxu je zde navíc ještě druhá promo karta."
+      "description": "Pokémon TCG Crown Zenith Collection je speciální kolekce karetní hry Pokémon z produktové edice Crown Zenith (poslední z cyklu Sword and Shield). Balení obsahuje kartu Regidrago V, Jumbo kartu Regidrago V, Promo Regieleki a čtyři Boostery. Oproti běžnému V Boxu je zde navíc ještě druhá promo karta. Description"
     },
     {
       "id": "9",
@@ -88,6 +87,16 @@
       "type": "box",
       "amount": 18,
       "description": "Hledáte velké množství Pokémonů a karet Pokémon? V tom případě je vaše hledání u konce! Booster Box obsahuje 36 Boosterů (rozšiřující balíček po 10 kartách) z edice Sword and Shield - Brilliant Stars, které jsou uloženy v tomto balení. Díky tomu výrazně ušetříte, než kdybyste kupovali Boostery samostatně, a navíc máte u tohoto produktu poštovné zdarma."
+    },
+    {
+      "id": "0f1de707-5f9d-4858-9190-7ce4996265a6",
+      "name": "úplně jinej název ",
+      "price": "1",
+      "discount": 0,
+      "imgUrl": "pikachu.png",
+      "type": "box",
+      "amount": "10",
+      "description": "jhnggh"
     }
   ]
 }

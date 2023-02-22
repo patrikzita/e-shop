@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Values } from "../components/products/ProductForm";
 import { ProductProps } from "../types/types";
 
 export function getProducts() {
@@ -36,14 +35,18 @@ export function getSpecificProduct(sort: string) {
     });
 }
 
-export const createProduct = async (productData: Values) => {
-  try {
-    const response = await axios.post(
-      "http://localhost:3000/products",
-      productData
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
+/* FIXME: Změnit type na správnou věc */
+export const createProduct = (productData: any) => {
+  return axios
+    .post("http://localhost:3000/products", {
+      ...productData,
+      id: crypto.randomUUID(),
+    })
+    .then((res) => res.data);
 };
+
+export function updateProduct(productData: any) {
+  return axios
+    .put(`http://localhost:3000/products/${productData.id}`, productData)
+    .then((res) => res.data);
+}
