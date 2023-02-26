@@ -244,7 +244,12 @@ export function NavBar() {
                   >
                     Empty the Bin
                   </Button>
-                  <Button size="small" variant="contained" color="error">
+                  <Button
+                    size="small"
+                    variant="contained"
+                    color="error"
+                    onClick={() => navigate("/cart")}
+                  >
                     Buy
                   </Button>
                 </Stack>

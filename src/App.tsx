@@ -11,6 +11,7 @@ const ProductDetail = lazy(() => import("./components/products/ProductDetail"));
 const ProductForm = lazy(() => import("./components/products/ProductForm"));
 const EditProduct = lazy(() => import("././components/products/EditProduct"));
 const ErrorComponent = lazy(() => import("./components/Others/ErrorComponent"));
+const Cart = lazy(() => import("./pages/cart"));
 
 export function App() {
   return (
@@ -25,6 +26,7 @@ export function App() {
             <Route path="/products/:id/edit" element={<EditProduct />} />
             <Route path="/products/new" element={<ProductForm />} />
             <Route path="/boxes" element={<Boxes />} />
+            <Route path="/cart/*" element={<Cart />} />
             <Route path="*" element={<ErrorComponent status={404} />} />
           </Routes>
         </Suspense>

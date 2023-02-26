@@ -4,10 +4,10 @@
       "id": "1",
       "name": "Pokémon Crown Zenith Elite Trainer Box",
       "price": 19.99,
+      "discount": 10,
       "imgUrl": "pokemon_crown_box.png",
       "type": "box",
       "amount": 10,
-      "discount": 10,
       "promotion": true,
       "description": "Pokémon Crown Zenith Elite Trainer Box je speciální dárkové balení pro všechny hráče, kteří se chtějí v hraní posunout o další úroveň a začít pravidelně chodit na turnajová hraní. Uvnitř balení naleznete speciální promo kartu s Pokémonem Lucario VSTAR, která zatím nikde jinde nevyšla. Obsah balení dále doplňuje 10 doplňkových Boosterů speciální edice Crown Zenith, 65 herních obalů s motivem Lucaria, 45 karet energií, průvodce edicí Crown Zenith, 6 kostek pro značení zranění, házecí kostka, 2 akrylové žetony pro popálení a otravu, 4 oddělovače a kód do online hry."
     },
@@ -18,7 +18,8 @@
       "imgUrl": "pokemon_crown_booster.png",
       "type": "booster",
       "amount": 18,
-      "description": "Pokémon Booster z edice Crown Zenith je základní doplňkový balíček karetní hry Pokémon, který nabízí hráčům možnost rozšířit si svoji sbírku Pokémonů o nové karty. V každém balíčku je 10 náhodných karet. Pokud budete mít štěstí, narazíte i na silné Pokémony VSTAR! "
+      "description": "Pokémon Booster z edice Crown Zenith je základní doplňkový balíček karetní hry Pokémon, který nabízí hráčům možnost rozšířit si svoji sbírku Pokémonů o nové karty. V každém balíčku je 10 náhodných karet. Pokud budete mít štěstí, narazíte i na silné Pokémony VSTAR! ",
+      "discount": 50
     },
     {
       "id": "3",
@@ -43,6 +44,7 @@
       "id": "5",
       "name": "Pokémon GO Booster",
       "price": 3.49,
+      "discount": 0,
       "imgUrl": "pokemon_go_booster.png",
       "type": "booster",
       "amount": 18,
@@ -62,11 +64,10 @@
       "name": "Pokémon Sword and Shield - Astral Radiance Booster Box",
       "price": 49.99,
       "imgUrl": "pokemon_sword_box.png",
-      "discount": 10,
       "type": "box",
       "amount": 18,
-      "promotion": true,
-      "description": "Hledáte velké množství Pokémonů a karet Pokémon? V tom případě je vaše hledání u konce! Booster Box obsahuje 36 Boosterů (rozšiřující balíček po 10 kartách) z edice Sword and Shield - Astral Radiance, které jsou uloženy v tomto balení. Díky tomu výrazně ušetříte, než kdybyste kupovali Boostery samostatně, a navíc máte u tohoto produktu poštovné zdarma."
+      "description": "Hledáte velké množství Pokémonů a karet Pokémon? V tom případě je vaše hledání u konce! Booster Box obsahuje 36 Boosterů (rozšiřující balíček po 10 kartách) z edice Sword and Shield - Astral Radiance, které jsou uloženy v tomto balení. Díky tomu výrazně ušetříte, než kdybyste kupovali Boostery samostatně, a navíc máte u tohoto produktu poštovné zdarma.",
+      "discount": 10
     },
     {
       "id": "8",
@@ -87,16 +88,6 @@
       "type": "box",
       "amount": 18,
       "description": "Hledáte velké množství Pokémonů a karet Pokémon? V tom případě je vaše hledání u konce! Booster Box obsahuje 36 Boosterů (rozšiřující balíček po 10 kartách) z edice Sword and Shield - Brilliant Stars, které jsou uloženy v tomto balení. Díky tomu výrazně ušetříte, než kdybyste kupovali Boostery samostatně, a navíc máte u tohoto produktu poštovné zdarma."
-    },
-    {
-      "id": "0f1de707-5f9d-4858-9190-7ce4996265a6",
-      "name": "úplně jinej název ",
-      "price": "1",
-      "discount": 0,
-      "imgUrl": "pikachu.png",
-      "type": "box",
-      "amount": "10",
-      "description": "jhnggh"
     }
   ]
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { FieldProps } from "formik";
 import { TextField, TextFieldProps } from "@mui/material";
 
-const FieldCustom: React.FC<FieldProps & TextFieldProps> = ({
+const InputField: React.FC<FieldProps & TextFieldProps> = ({
   label,
   field,
   form,
@@ -20,7 +20,7 @@ const FieldCustom: React.FC<FieldProps & TextFieldProps> = ({
   );
 };
 
-export default FieldCustom;
+export default InputField;
 
 /* form obsahuje values, errors, touched, setFieldValue, setFieldTouched 
 touched - pole zda bylo formulářové pole změněno uživatelem

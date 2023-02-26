@@ -13,34 +13,59 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import { useQuery } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { getProduct } from "../../data/products";
+import { deleteProduct, getProduct } from "../../data/products";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import ErrorComponent from "../Others/ErrorComponent";
 import axios from "axios";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const queryClient = useQueryClient() as QueryClient;
+  const { cartItems, removeCartItem } = useShoppingCart();
   const idAsString: string = String(id);
   const productQuery = useQuery({
     queryKey: ["products", idAsString],
     queryFn: () => getProduct(idAsString),
   });
+  const navigate = useNavigate();
+  const deleteProductMutation = useMutation(deleteProduct, {
+    onSuccess: () => {
+      if (cartItems) {
+        const productInCart = cartItems.find((item) => item.id === id);
+
+        if (productInCart) {
+          removeCartItem(idAsString);
+        }
+      }
+      queryClient.invalidateQueries(["products"]);
+      navigate("/");
+    },
+  });
+
   const { increaseCartQuantity } = useShoppingCart();
   const [anchorShareMenu, setAnchorShareMenu] = useState<null | HTMLElement>(
     null
   );
   const open = Boolean(anchorShareMenu);
-  const navigate = useNavigate();
 
   const handleClickShareMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorShareMenu(event.currentTarget);
   };
   const handleCloseShareMenu = () => {
     setAnchorShareMenu(null);
+  };
+
+  const handleDeleteProduct = () => {
+    deleteProductMutation.mutate(idAsString);
   };
 
   const ImgComponent = styled("div")(({ theme }) => ({}));
@@ -216,6 +241,13 @@ const ProductDetail = () => {
               onClick={() => navigate(`/products/${id}/edit`)}
             >
               Edit
+            </Button>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleDeleteProduct}
+            >
+              Delete
             </Button>
           </Box>
         </Stack>

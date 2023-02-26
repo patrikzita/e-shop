@@ -1,4 +1,4 @@
-import { CatchingPokemon, Delete, Discount } from "@mui/icons-material";
+import { Delete } from "@mui/icons-material";
 import {
   Avatar,
   IconButton,
@@ -7,6 +7,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { getProduct } from "../../data/products";
 import { formatCurrency } from "../../utilities/formatCurrency";
@@ -17,6 +18,7 @@ type CartItem = {
 
 const CartItem = ({ id }: CartItem) => {
   const { removeCartItem } = useShoppingCart();
+  const navigate = useNavigate();
 
   const productQuery = useQuery({
     queryKey: ["products", id],
@@ -26,7 +28,7 @@ const CartItem = ({ id }: CartItem) => {
   if (productQuery.status === "error") return <h1>Not connected to API</h1>;
   return (
     <ListItem
-      onClick={() => console.log("Ahoj")}
+      onClick={() => navigate(`/products/${id}`)}
       sx={{
         cursor: "pointer",
         "&:hover": {
@@ -34,7 +36,12 @@ const CartItem = ({ id }: CartItem) => {
         },
       }}
       secondaryAction={
-        <IconButton onClick={() => removeCartItem(id)}>
+        <IconButton
+          onClick={(event) => {
+            event.stopPropagation();
+            removeCartItem(id);
+          }}
+        >
           <Delete color="error" />
         </IconButton>
       }
@@ -43,7 +50,7 @@ const CartItem = ({ id }: CartItem) => {
         <Avatar
           variant="square"
           alt={productQuery.data.name}
-          src={productQuery.data.imgUrl}
+          src={`/${productQuery.data.imgUrl}`}
         />
       </ListItemAvatar>
       <ListItemText

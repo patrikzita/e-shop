@@ -35,8 +35,7 @@ export function getSpecificProduct(sort: string) {
     });
 }
 
-/* FIXME: Změnit type na správnou věc */
-export const createProduct = (productData: any) => {
+export const createProduct = (productData: ProductProps) => {
   return axios
     .post("http://localhost:3000/products", {
       ...productData,
@@ -45,8 +44,13 @@ export const createProduct = (productData: any) => {
     .then((res) => res.data);
 };
 
-export function updateProduct(productData: any) {
+export function updateProduct(productData: ProductProps) {
   return axios
     .put(`http://localhost:3000/products/${productData.id}`, productData)
     .then((res) => res.data);
 }
+
+export const deleteProduct = async (id: string) => {
+  const response = await axios.delete(`http://localhost:3000/products/${id}`);
+  return response.data;
+};

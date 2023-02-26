@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { Field, Form, Formik } from "formik";
-import FieldCustom from "./FieldCustom";
+import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { createProduct, updateProduct } from "../../data/products";
@@ -35,7 +35,7 @@ const validationSchema = Yup.object().shape({
     .integer("Discount must be an integer")
     .min(0, "Discount can't be negative"),
   imgUrl: Yup.string().required("Image is required"),
-  type: Yup.string().required("Type is required"),
+  type: Yup.string().oneOf(["booster", "box"]).required("Type is required"),
   amount: Yup.number()
     .typeError("Amount must be a number")
     .required("Amount is required")
@@ -54,7 +54,6 @@ const defaultProps: OptionalProductsProps = {
   description: "",
   id: null,
 };
-
 const ProductForm = ({
   name,
   price,
@@ -86,38 +85,34 @@ const ProductForm = ({
     },
   });
 
-  const handleSubmit = (values: ProductProps) => {
-    console.log("spuštěno");
+  const createDataToSend = (values: ProductProps) => {
     const { name, price, discount, imgUrl, type, amount, description } = values;
+    const dataToSend: ProductProps = {
+      name,
+      price,
+      imgUrl,
+      type,
+      amount,
+      description,
+    };
+    if (
+      typeof discount === "string" &&
+      !isNaN(parseFloat(discount)) &&
+      parseInt(discount) !== 0
+    ) {
+      dataToSend.discount = parseInt(discount);
+    }
+    return dataToSend;
+  };
+
+  const handleFormSubmission = (values: ProductProps) => {
     if (id !== null) {
-      console.log("Probíhá update");
       updateProductMutation.mutate({
         id: id,
-        name: name,
-        price: price,
-        discount: discount,
-        imgUrl: imgUrl,
-        type: type,
-        amount: amount,
-        description: description,
+        ...createDataToSend(values),
       });
     } else {
-      const dataToSend: ProductProps = {
-        name,
-        price,
-        imgUrl,
-        type,
-        amount,
-        description,
-      };
-
-      if (typeof discount === "number" && !isNaN(discount)) {
-        dataToSend.discount = discount;
-      }
-
-      createProductMutation.mutate({
-        ...dataToSend,
-      });
+      createProductMutation.mutate(createDataToSend(values));
     }
   };
 
@@ -135,9 +130,7 @@ const ProductForm = ({
           description: description,
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          handleSubmit(values);
-        }}
+        onSubmit={handleFormSubmission}
       >
         {({ values, handleChange, handleBlur, errors, touched }) => (
           <Form>
@@ -160,12 +153,12 @@ const ProductForm = ({
                 name="name"
                 label="Name"
                 error={!!errors.name}
-                component={FieldCustom}
+                component={InputField}
               />
-              <Field name="price" label="Price" component={FieldCustom} />
+              <Field name="price" label="Price" component={InputField} />
 
-              <Field name="discount" label="Discount" component={FieldCustom} />
-              <Field name="imgUrl" label="Image" component={FieldCustom} />
+              <Field name="discount" label="Discount" component={InputField} />
+              <Field name="imgUrl" label="Image" component={InputField} />
 
               <Field
                 name="type"
@@ -185,7 +178,7 @@ const ProductForm = ({
                 ))}
               </Field>
 
-              <Field name="amount" label="Amount" component={FieldCustom} />
+              <Field name="amount" label="Amount" component={InputField} />
 
               <TextField
                 name="description"
@@ -201,7 +194,7 @@ const ProductForm = ({
 
               <Stack direction="row" gap={2}>
                 <Button type="submit" variant="contained" color="secondary">
-                  Create
+                  {id ? "Update" : "Create"}
                 </Button>
                 <Button
                   variant="contained"
@@ -219,5 +212,5 @@ const ProductForm = ({
   );
 };
 
-ProductForm.defaultProps = defaultProps;
+ProductForm.defaultProps = defaultProps; //nastavení default props, když nejsou data předány
 export default ProductForm;
