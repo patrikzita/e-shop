@@ -4,12 +4,11 @@
       "id": "1",
       "name": "Pokémon Crown Zenith Elite Trainer Box",
       "price": 19.99,
-      "discount": 10,
       "imgUrl": "pokemon_crown_box.png",
       "type": "box",
       "amount": 10,
-      "promotion": true,
-      "description": "Pokémon Crown Zenith Elite Trainer Box je speciální dárkové balení pro všechny hráče, kteří se chtějí v hraní posunout o další úroveň a začít pravidelně chodit na turnajová hraní. Uvnitř balení naleznete speciální promo kartu s Pokémonem Lucario VSTAR, která zatím nikde jinde nevyšla. Obsah balení dále doplňuje 10 doplňkových Boosterů speciální edice Crown Zenith, 65 herních obalů s motivem Lucaria, 45 karet energií, průvodce edicí Crown Zenith, 6 kostek pro značení zranění, házecí kostka, 2 akrylové žetony pro popálení a otravu, 4 oddělovače a kód do online hry."
+      "description": "Pokémon Crown Zenith Elite Trainer Box je speciální dárkové balení pro všechny hráče, kteří se chtějí v hraní posunout o další úroveň a začít pravidelně chodit na turnajová hraní. Uvnitř balení naleznete speciální promo kartu s Pokémonem Lucario VSTAR, která zatím nikde jinde nevyšla. Obsah balení dále doplňuje 10 doplňkových Boosterů speciální edice Crown Zenith, 65 herních obalů s motivem Lucaria, 45 karet energií, průvodce edicí Crown Zenith, 6 kostek pro značení zranění, házecí kostka, 2 akrylové žetony pro popálení a otravu, 4 oddělovače a kód do online hry.",
+      "discount": 15
     },
     {
       "id": "2",
@@ -19,7 +18,8 @@
       "type": "booster",
       "amount": 18,
       "description": "Pokémon Booster z edice Crown Zenith je základní doplňkový balíček karetní hry Pokémon, který nabízí hráčům možnost rozšířit si svoji sbírku Pokémonů o nové karty. V každém balíčku je 10 náhodných karet. Pokud budete mít štěstí, narazíte i na silné Pokémony VSTAR! ",
-      "discount": 50
+      "discount": 50,
+      "promotion": true
     },
     {
       "id": "3",

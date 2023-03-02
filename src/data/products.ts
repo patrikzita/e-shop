@@ -1,11 +1,11 @@
 import axios from "axios";
 import { ProductProps } from "../types/types";
 
-export function getProducts() {
+export function getProductsDataFetch() {
   return axios.get("http://localhost:3000/products").then((res) => res.data);
 }
 
-export function getProduct(id: string) {
+export function getProductDataFetch(id: string) {
   return axios
     .get(`http://localhost:3000/products/${id}`)
     .then((res) => res.data)

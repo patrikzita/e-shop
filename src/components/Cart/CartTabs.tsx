@@ -1,28 +1,17 @@
 import { Stack, styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useAligment from "../../hooks/useAligment";
+
 const CartTabs = () => {
-  const [alignment, setAlignment] = useState<string | null>("cart");
+  const [alignment, setAlignment] = useAligment();
   const navigate = useNavigate();
-  const location = useLocation();
+
   const handleAlignment = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null
-  ) => {
+    event: React.MouseEvent<HTMLElement>, // For typescript, onChange value needs this.
+    newAlignment: string
+  ): void => {
     setAlignment(newAlignment);
   };
-
-  useEffect(() => {
-    if (location.pathname === "/cart/payment") {
-      setAlignment("payment Delivery");
-    } else if (location.pathname === "/cart/address") {
-      setAlignment("address");
-    } else if (location.pathname === "/cart/summary") {
-      setAlignment("summary");
-    } else {
-      setAlignment("cart");
-    }
-  }, [location]);
 
   return (
     <Stack
@@ -36,7 +25,7 @@ const CartTabs = () => {
         onChange={handleAlignment}
         sx={{
           "&.MuiButtonBase-root-MuiToggleButton-root": {
-            border: "0",
+            border: "none",
           },
         }}
       >

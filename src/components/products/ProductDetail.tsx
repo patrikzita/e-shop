@@ -5,37 +5,34 @@ import {
   Button,
   Divider,
   IconButton,
-  Stack,
-  styled,
-  Typography,
   Link,
   Menu,
   MenuItem,
+  Stack,
+  styled,
+  Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import {
   QueryClient,
   useMutation,
-  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { deleteProduct, getProduct } from "../../data/products";
+import { deleteProduct } from "../../data/products";
+import { useProductsQuery } from "../../data/queries";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import ErrorComponent from "../Others/ErrorComponent";
-import axios from "axios";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const queryClient = useQueryClient() as QueryClient;
   const { cartItems, removeCartItem } = useShoppingCart();
   const idAsString: string = String(id);
-  const productQuery = useQuery({
-    queryKey: ["products", idAsString],
-    queryFn: () => getProduct(idAsString),
-  });
+  const productQuery = useProductsQuery();
   const navigate = useNavigate();
   const deleteProductMutation = useMutation(deleteProduct, {
     onSuccess: () => {

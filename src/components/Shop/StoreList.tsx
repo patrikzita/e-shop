@@ -57,7 +57,7 @@ const StoreList = ({ title, sortItem }: StoreListProps) => {
           {productsQuery.data.map((product: ProductProps) => (
             <Grid item xs={12} sm={6} md={4} lg={4} key={product.id}>
               <StoreItem
-                id={product.id}
+                id={product.id} //TODO: Opravit
                 name={product.name}
                 price={product.price}
                 imgUrl={product.imgUrl}

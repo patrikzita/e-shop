@@ -16,8 +16,6 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-/* TODO: Použít SnackBar pro hlášku, že byl přidán Item do Cart */
-
 type StoreItemProps = {
   id: string;
   name: string;

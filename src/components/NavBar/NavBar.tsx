@@ -133,7 +133,12 @@ export function NavBar() {
             <Button sx={{ color: "common.black" }} onClick={removeCartItems}>
               Empty the Bin
             </Button>
-            <Button size="small" variant="contained" color="error">
+            <Button
+              size="small"
+              variant="contained"
+              color="error"
+              onClick={() => navigate("/cart")}
+            >
               Buy
             </Button>
           </Stack>

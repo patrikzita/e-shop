@@ -6,10 +6,9 @@ import {
   ListItemAvatar,
   ListItemText,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { getProduct } from "../../data/products";
+import { useProductQuery } from "../../data/queries";
 import { formatCurrency } from "../../utilities/formatCurrency";
 
 type CartItem = {
@@ -20,10 +19,7 @@ const CartItem = ({ id }: CartItem) => {
   const { removeCartItem } = useShoppingCart();
   const navigate = useNavigate();
 
-  const productQuery = useQuery({
-    queryKey: ["products", id],
-    queryFn: () => getProduct(id),
-  });
+  const productQuery = useProductQuery(id);
   if (productQuery.status === "loading") return <h1>Loading...</h1>;
   if (productQuery.status === "error") return <h1>Not connected to API</h1>;
   return (
