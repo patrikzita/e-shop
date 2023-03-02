@@ -1,71 +1,36 @@
-import { Facebook, Share, ShoppingCart, Twitter } from "@mui/icons-material";
+import { ShoppingCart } from "@mui/icons-material";
 import {
   Box,
   Breadcrumbs,
   Button,
   Divider,
-  IconButton,
   Link,
-  Menu,
-  MenuItem,
   Stack,
   styled,
   Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { deleteProduct } from "../../data/products";
-import { useProductsQuery } from "../../data/queries";
+import { useDeleteProductQuery, useProductQuery } from "../../data/queries";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import ErrorComponent from "../Others/ErrorComponent";
+import ShareMenu from "./ShareMenu";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const queryClient = useQueryClient() as QueryClient;
-  const { cartItems, removeCartItem } = useShoppingCart();
-  const idAsString: string = String(id);
-  const productQuery = useProductsQuery();
+  const convertedId = String(id);
+  const productQuery = useProductQuery(convertedId);
+  const deleteProductMutation = useDeleteProductQuery(convertedId);
   const navigate = useNavigate();
-  const deleteProductMutation = useMutation(deleteProduct, {
-    onSuccess: () => {
-      if (cartItems) {
-        const productInCart = cartItems.find((item) => item.id === id);
-
-        if (productInCart) {
-          removeCartItem(idAsString);
-        }
-      }
-      queryClient.invalidateQueries(["products"]);
-      navigate("/");
-    },
-  });
-
   const { increaseCartQuantity } = useShoppingCart();
-  const [anchorShareMenu, setAnchorShareMenu] = useState<null | HTMLElement>(
-    null
-  );
-  const open = Boolean(anchorShareMenu);
-
-  const handleClickShareMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorShareMenu(event.currentTarget);
-  };
-  const handleCloseShareMenu = () => {
-    setAnchorShareMenu(null);
-  };
 
   const handleDeleteProduct = () => {
-    deleteProductMutation.mutate(idAsString);
+    deleteProductMutation.mutate(convertedId);
   };
 
-  const ImgComponent = styled("div")(({ theme }) => ({}));
+  const ImgComponent = styled("div")();
 
   if (productQuery.status === "loading") return <div>Loading data...</div>;
   if (productQuery.error instanceof Error) {
@@ -75,32 +40,6 @@ const ProductDetail = () => {
     }
     return <ErrorComponent status={errorStatus ?? 500} />;
   }
-
-  const ShareMenu = (
-    <Menu
-      id="share-menu"
-      open={open}
-      anchorEl={anchorShareMenu}
-      onClose={handleCloseShareMenu}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-    >
-      <Stack direction="column">
-        <MenuItem onClick={handleCloseShareMenu}>
-          <Twitter sx={{ color: "common.blue" }} />
-        </MenuItem>
-        <MenuItem onClick={handleCloseShareMenu}>
-          <Facebook sx={{ color: "common.blue" }} />
-        </MenuItem>
-      </Stack>
-    </Menu>
-  );
 
   return (
     <>
@@ -152,9 +91,7 @@ const ProductDetail = () => {
               <Typography sx={{ fontSize: "1.3rem" }}>
                 {productQuery.data.name}
               </Typography>
-              <IconButton onClick={(e) => handleClickShareMenu(e)}>
-                <Share />
-              </IconButton>
+              <ShareMenu />
             </Stack>
             <Typography sx={{ color: "#858585" }}>
               {productQuery.data.description}
@@ -248,9 +185,9 @@ const ProductDetail = () => {
             </Button>
           </Box>
         </Stack>
+
         <Divider />
       </Container>
-      {ShareMenu}
     </>
   );
 };
