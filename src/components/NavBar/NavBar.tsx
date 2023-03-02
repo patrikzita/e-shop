@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   AppBar,
   styled,
@@ -19,6 +20,7 @@ import {
   Button,
 } from "@mui/material";
 import { Clear, Menu as MenuButton, ShoppingCart } from "@mui/icons-material";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import CartItem from "./CartItem";
@@ -271,7 +273,6 @@ export function NavBar() {
 
 /* MATERIAL UI STYLED COMPONENTS */
 
-/* Chci o stylovat skoro každý MUI component zde, aby potom byl kód více přehledný */
 const StyledAppBar = styled(AppBar)({
   position: "sticky",
   zIndex: "1210", // Kvůli Draweru, aby se schoval pod menu

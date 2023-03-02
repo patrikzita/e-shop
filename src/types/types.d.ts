@@ -1,5 +1,5 @@
 export type ProductProps = {
-  id?: string;
+  id: string;
   name: string;
   price: number;
   type: string;
@@ -9,7 +9,6 @@ export type ProductProps = {
   discount?: number;
   promotion?: boolean;
 };
-
 export type OptionalProductsProps = {
   name: string;
   price: number;

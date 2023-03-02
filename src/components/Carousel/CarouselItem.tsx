@@ -1,8 +1,5 @@
 import { Box, Button, Stack, styled, Typography } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
-
-/* Možnosti změny kde bude text, změna obrázku, link, title, subtitle */
 
 type CarouselProps = {
   title: string;

@@ -1,17 +1,20 @@
-import { ShoppingCart } from "@mui/icons-material";
+import { useParams, useNavigate } from "react-router-dom";
+
 import {
   Box,
   Breadcrumbs,
   Button,
+  Container,
   Divider,
   Link,
   Stack,
   styled,
   Typography,
 } from "@mui/material";
-import { Container } from "@mui/system";
+
+import { ShoppingCart } from "@mui/icons-material";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useDeleteProductQuery, useProductQuery } from "../../data/queries";
 import { formatCurrency } from "../../utilities/formatCurrency";

@@ -1,7 +1,8 @@
+import { useState } from "react";
+
 import { Check, ShoppingCart } from "@mui/icons-material";
 import {
   Alert,
-  AlertTitle,
   Box,
   Button,
   Card,
@@ -11,10 +12,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { formatCurrency } from "../../utilities/formatCurrency";
-import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { formatCurrency } from "../../utilities/formatCurrency";
 
 type StoreItemProps = {
   id: string;
@@ -25,13 +26,17 @@ type StoreItemProps = {
 };
 
 const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
+  const [isOpenSnack, setIsOpenSnack] = useState<Readonly<boolean>>(false);
   const { increaseCartQuantity, cartItems } = useShoppingCart();
-  const isAdded = cartItems.some((item) => item.id === id);
-  const [isOpenSnack, setIsOpenSnack] = useState<boolean>(false);
+  const isProductAdded = cartItems.some((item) => item.id === id);
   const navigate = useNavigate();
 
+  function handleClickOnCard() {
+    navigate(`/products/${id}`);
+  }
+
   const handleClose = (
-    event: React.SyntheticEvent | Event,
+    event: React.SyntheticEvent | Event, // Neccesary for MUI
     reason?: string
   ) => {
     if (reason === "clickaway") {
@@ -40,9 +45,28 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
     setIsOpenSnack(false);
   };
 
-  function handleClickCard() {
-    navigate(`/products/${id}`);
-  }
+  const SnackBarAlert = (
+    <Snackbar
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      autoHideDuration={1500}
+      open={isOpenSnack}
+      onClose={handleClose}
+      sx={{
+        "&.MuiSnackbar-root": {
+          top: "100px",
+        },
+      }}
+    >
+      <Alert
+        sx={{ minWidth: "200px", fontSize: "1.3rem" }}
+        severity="success"
+        onClose={handleClose}
+        icon={<Check />}
+      >
+        Added to Cart
+      </Alert>
+    </Snackbar>
+  );
 
   return (
     <>
@@ -56,7 +80,7 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
           },
         }}
-        onClick={() => handleClickCard()}
+        onClick={handleClickOnCard}
       >
         <CardMedia component="img" image={imgUrl} />
         <CardContent
@@ -127,7 +151,7 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
             </Typography>
           )}
 
-          {isAdded ? (
+          {isProductAdded ? (
             <Box>
               <Typography sx={{ color: "success.main", fontWeight: "700" }}>
                 Added to Cart
@@ -155,26 +179,7 @@ const StoreItem = ({ id, name, price, imgUrl, discount }: StoreItemProps) => {
           )}
         </CardContent>
       </Card>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        autoHideDuration={1500}
-        open={isOpenSnack}
-        onClose={handleClose}
-        sx={{
-          "&.MuiSnackbar-root": {
-            top: "100px",
-          },
-        }}
-      >
-        <Alert
-          sx={{ minWidth: "200px", fontSize: "1.3rem" }}
-          severity="success"
-          onClose={handleClose}
-          icon={<Check />}
-        >
-          Added to Cart
-        </Alert>
-      </Snackbar>
+      {SnackBarAlert}
     </>
   );
 };

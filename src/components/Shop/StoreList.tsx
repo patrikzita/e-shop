@@ -8,11 +8,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import StoreItem from "./StoreItem";
+
+import { useNavigate } from "react-router-dom";
+
 import { useQuery } from "@tanstack/react-query";
 import { getSpecificProduct } from "../../data/products";
+
 import { ProductProps } from "../../types/types";
-import { useNavigate } from "react-router-dom";
+import StoreItem from "./StoreItem";
 
 type StoreListProps = {
   title: string;
@@ -57,7 +60,7 @@ const StoreList = ({ title, sortItem }: StoreListProps) => {
           {productsQuery.data.map((product: ProductProps) => (
             <Grid item xs={12} sm={6} md={4} lg={4} key={product.id}>
               <StoreItem
-                id={product.id} //TODO: Opravit
+                id={product.id}
                 name={product.name}
                 price={product.price}
                 imgUrl={product.imgUrl}

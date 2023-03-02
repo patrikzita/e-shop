@@ -1,6 +1,8 @@
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Button, Container, Divider, Stack, Typography } from "@mui/material";
+
 import { useNavigate } from "react-router-dom";
+
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useProductsQuery } from "../../data/queries";
 import { ProductProps } from "../../types/types";
@@ -9,9 +11,9 @@ import CartOrderItem from "./CartOrderItem";
 
 const CartOrder = () => {
   const { cartItems } = useShoppingCart();
-  const navigate = useNavigate();
 
   const handleNavigate = (url: string) => {
+    const navigate = useNavigate();
     navigate(url);
   };
   const { data } = useProductsQuery();
@@ -32,6 +34,7 @@ const CartOrder = () => {
   );
 
   return cartItems.length === 0 ? (
+    /* TODO: Dodělat sekci, prázdný Shopping Cart */
     <h1>Looks like there is nothing</h1>
   ) : (
     <Container>

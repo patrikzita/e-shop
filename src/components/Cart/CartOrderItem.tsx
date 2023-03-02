@@ -1,4 +1,5 @@
 import { Stack, styled, Typography } from "@mui/material";
+
 import { Link } from "react-router-dom";
 import { useProductQuery } from "../../data/queries";
 import { formatCurrency } from "../../utilities/formatCurrency";

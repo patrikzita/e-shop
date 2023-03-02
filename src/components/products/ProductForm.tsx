@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   MenuItem,
@@ -6,14 +7,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Box } from "@mui/system";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik } from "formik";
-import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+
 import { createProduct, updateProduct } from "../../data/products";
 import { OptionalProductsProps, ProductProps } from "./../../types/types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import InputField from "./InputField";
 
 const TYPES = [
   {
@@ -88,6 +90,7 @@ const ProductForm = ({
   const createDataToSend = (values: ProductProps) => {
     const { name, price, discount, imgUrl, type, amount, description } = values;
     const dataToSend: ProductProps = {
+      id,
       name,
       price,
       imgUrl,
@@ -108,7 +111,6 @@ const ProductForm = ({
   const handleFormSubmission = (values: ProductProps) => {
     if (id !== null) {
       updateProductMutation.mutate({
-        id: id,
         ...createDataToSend(values),
       });
     } else {
@@ -121,6 +123,7 @@ const ProductForm = ({
       <Typography variant="h4">Create new product</Typography>
       <Formik
         initialValues={{
+          id: id,
           name: name,
           price: price,
           discount: discount,
